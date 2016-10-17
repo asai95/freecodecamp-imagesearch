@@ -1,9 +1,10 @@
 {
   "name": "asai95-imagesearch",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "dependencies": {
     "express": "4.x.x",
-    "mongoose": "4.x.x"
+    "mongoose": "4.x.x",
+    "body-parser": "1.x.x"
   },
   "main": "index.js",
   "repository": {
