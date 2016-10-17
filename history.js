@@ -1,6 +1,6 @@
-var mongoose = require("mongoose")
+var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
-var db = mongoose.createConnection("mongodb://127.0.0.1/image");
+var db = mongoose.createConnection(process.env.MONGODB_URI);
 
 var histSchema = new Schema({
     "query": String,
