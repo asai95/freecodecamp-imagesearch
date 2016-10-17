@@ -35,8 +35,11 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+<<<<<<< HEAD
 
 typings
 .vscode
 jsconfig.json
 typings.json
+=======
+>>>>>>> 9e9f77e55688b36746be82b45f96af32fd81fed4

@@ -17,7 +17,8 @@ var searchImages = function(req, res, next) {
         });
         response.on('end', () => {
             var j = JSON.parse(s.replace("jsonFlickrApi(", "").slice(0, -1));
-            if (j.stats === "OK") {
+            console.log(j.stat)
+            if (j.stat === "ok") {
                 var base = "https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg";
                 var photos = j.photos.photo;
                 var toSend = [];
@@ -36,21 +37,41 @@ var searchImages = function(req, res, next) {
                 next();
             } else {
                 req.result = "Error";
+                next();
             }
         });
         response.on('error', (err) => {
             req.result = err;
             next();
         })
-    });
+    }).end();
+}
+
+var saveQuery = function(req, res, next) {
+    var hist = new Hist({
+        query: req.params.params,
+        time: Date.now()
+    })
+    hist.save(() => {next()})
 }
 
 app.use(bp.urlencoded({
   extended: true
 }));
 
-app.get("/:params",searchImages, (req, res) => {
-    return res.send(req.result);
+app.get("/search/:params", searchImages, saveQuery, (req, res) => {
+    res.send(req.result);
 });
+
+app.get("/latest", (req, res) => {
+    Hist.find({}, '-_id', (err, response) => {
+        var answ = response
+        .sort((a, b) => {
+            return (b.time - a.time)
+        })
+        .slice(0, 10);
+        res.send(answ)
+    })
+})
 
 app.listen(8080)
