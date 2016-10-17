@@ -1,0 +1,17 @@
+{
+  "name": "asai95-imagesearch",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "4.x.x",
+    "mongoose": "4.x.x",
+    "typings": "^1.4.0"
+  },
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
